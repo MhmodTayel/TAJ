@@ -8,6 +8,7 @@ import db from "./plugins/db";
 import config from "./config";
 import { Citizen, Pharmacist, User } from "./schemas/User";
 import { auth } from "./plugins/auth";
+import { Login } from "./schemas/Responses";
 
 export const server = fastify({
   pluginTimeout: config.FASTIFY_PLUGIN_TIMEOUT,
@@ -31,6 +32,8 @@ export const server = fastify({
 server.addSchema(Citizen);
 server.addSchema(Pharmacist);
 server.addSchema(User);
+server.addSchema(Login);
+
 server.register(db);
 
 server.register(jwt, {

@@ -1,6 +1,6 @@
-import { server } from "..";
 
-export const login = {
+export const Login = {
+  $id:"login",
   type: "object",
   properties: {
     success: { type: "boolean" },
@@ -10,4 +10,3 @@ export const login = {
   },
 };
 
-server.addSchema(login);

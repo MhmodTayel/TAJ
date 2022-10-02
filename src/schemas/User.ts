@@ -84,7 +84,7 @@ export const Pharmacist = {
       type: "string",
       description:
         "password Minimum eight characters, at least one letter, one number and one special character:",
-      pattern: "^(?=.*[A-Za-z])(?=.*d)(?=.*[@$!%*#?&])[A-Za-zd@$!%*#?&]{8,}$",
+      pattern: "^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$",
     },
 
     age: {

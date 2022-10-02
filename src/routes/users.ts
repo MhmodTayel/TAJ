@@ -35,7 +35,14 @@ export default async (fastify: FastifyInstance) => {
     method: "POST",
     schema: {
       body: { $ref: "user#" },
-      response: {},
+      response: {
+        200: {
+          $ref: "login#",
+        },
+        401: {
+          $ref: "login#",
+        },
+      },
     },
     url: "/citizen/login",
     handler: async (request: FastifyRequest, reply: FastifyReply) => {
@@ -63,17 +70,34 @@ export default async (fastify: FastifyInstance) => {
     method: "POST",
     schema: {
       body: { $ref: "user#" },
+      response: {
+        200: {
+          $ref: "login#",
+        },
+        401: {
+          $ref: "login#",
+        },
+      },
     },
     url: "/pharmacist/login",
     handler: async (request: FastifyRequest, reply: FastifyReply) => {
       const { body: userData } = request as any;
-      const token = await login(userData, "pharmacist");
-      reply.code(200).send({
-        success: true,
-        token,
-        msg: "login successfully",
-        statusCode: 200,
-      });
+      try {
+        const token = await login(userData, "pharmacist");
+        reply.code(200).send({
+          success: true,
+          token,
+          msg: "login successfully",
+          statusCode: 200,
+        });
+      } catch (error) {
+        reply.code(401).send({
+          success: false,
+          token: null,
+          msg: error,
+          statusCode: 401,
+        });
+      }
     },
   });
 };
